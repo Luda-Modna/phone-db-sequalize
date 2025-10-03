@@ -1,0 +1,54 @@
+POST http://localhost:5000/api/phones
+Content-Type: application/json
+
+{
+    "model": "Galaxy  19",
+    "brand": "Samsung",
+    "productYear": "2016-08-21",
+    "sizeRAM": 8,
+    "processor": "Snapdragon",
+    "screenDiagonal": 6,
+    "isNFC": true
+}
+
+GET  http://localhost:5000/api/phones?page=2&results=2
+
+GET http://localhost:5000/api/phones/5
+
+GET http://localhost:5000/api/phones/55
+
+PATCH  http://localhost:5000/api/phones/5
+Content-Type: application/json
+
+{
+    "isNFC": true
+}
+
+
+PUT http://localhost:5000/api/phones/4
+Content-Type: application/json
+
+{
+    "model": "Galaxy  19",
+    "brand": "Samsung",
+    "productYear": "2016-08-21",
+    "sizeRAM": 8,
+    "processor": "Snapdragon",
+    "screenDiagonal": 6,
+    "isNFC": true
+}
+
+PUT http://localhost:5000/api/phones/14
+Content-Type: application/json
+
+{
+    "model": "Galaxy  19",
+    "brand": "Samsung",
+    "productYear": "2016-08-21",
+    "sizeRAM": 8,
+    "processor": "Snapdragon",
+    "screenDiagonal": 6,
+    "isNFC": true
+}
+
+DELETE http://localhost:5000/api/phones/6
