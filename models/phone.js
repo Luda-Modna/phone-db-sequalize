@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
           max: 128,
           isInt: true,
         },
+        field: 'size_ram',
       },
       processor: {
         type: DataTypes.STRING,
@@ -55,7 +56,11 @@ module.exports = (sequelize, DataTypes) => {
           max: 10,
         },
       },
-      isNFC: DataTypes.BOOLEAN,
+      isNFC: {
+        type: DataTypes.BOOLEAN,
+        field: 'is_nfs',
+        allowNull: false,
+      },
     },
     {
       sequelize,
