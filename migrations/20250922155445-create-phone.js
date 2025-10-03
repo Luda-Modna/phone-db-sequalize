@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Phones', {
+    await queryInterface.createTable('phones', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,32 +15,32 @@ module.exports = {
       brand: {
         type: Sequelize.STRING
       },
-      productYear: {
+      product_year: {
         type: Sequelize.DATE
       },
-      sizeRAM: {
+      size_ram: {
         type: Sequelize.INTEGER
       },
       processor: {
         type: Sequelize.STRING
       },
-      screenDiagonal: {
+      screen_diagonal: {
         type: Sequelize.INTEGER
       },
-      isNFC: {
+      is_nfs: {
         type: Sequelize.BOOLEAN
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Phones');
+    await queryInterface.dropTable('phones');
   }
 };
