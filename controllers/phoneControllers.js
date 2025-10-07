@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const createHttpError = require('http-errors');
 const { Phone } = require('./../models');
 const { EXCLUDE_ATTRIBUTES } = require('./../constants');
 
@@ -12,7 +13,7 @@ module.exports.createPhone = async (req, res, next) => {
       return next(createHttpError(400, 'Something went wrong'));
     }
 
-    const preparedPhone = _.omit(created.get(), [EXCLUDE_ATTRIBUTES]);
+    const preparedPhone = _.omit(created.get(), EXCLUDE_ATTRIBUTES);
 
     res.status(201).send({ data: preparedPhone });
   } catch (err) {
@@ -26,7 +27,7 @@ module.exports.getPhones = async (req, res, next) => {
   try {
     const foundPhones = await Phone.findAll({
       raw: true,
-      attributes: { exclude: [EXCLUDE_ATTRIBUTES] },
+      attributes: { exclude: EXCLUDE_ATTRIBUTES },
       limit,
       offset,
       order: ['id'],
@@ -46,7 +47,7 @@ module.exports.getPhoneById = async (req, res, next) => {
   try {
     const foundPhone = await Phone.findByPk(id, {
       raw: true,
-      attributes: { exclude: [EXCLUDE_ATTRIBUTES] },
+      attributes: { exclude: EXCLUDE_ATTRIBUTES },
     });
 
     if (!foundPhone) {
@@ -76,7 +77,7 @@ module.exports.updatePhoneById = async (req, res, next) => {
       return next(createHttpError(404, 'Phone not found ):'));
     }
 
-    const preparedPhone = _.omit(updatedPhone, [EXCLUDE_ATTRIBUTES]);
+    const preparedPhone = _.omit(updatedPhone, EXCLUDE_ATTRIBUTES);
 
     res.status(200).send({ data: preparedPhone });
   } catch (err) {
@@ -102,7 +103,7 @@ module.exports.updateOrCreatePhone = async (req, res, next) => {
       return next();
     }
 
-    const preparedPhone = _.omit(updatedPhone, [EXCLUDE_ATTRIBUTES]);
+    const preparedPhone = _.omit(updatedPhone, EXCLUDE_ATTRIBUTES);
 
     res.status(200).send({ data: preparedPhone });
   } catch (err) {
@@ -116,7 +117,7 @@ module.exports.deletePhoneById = async (req, res, next) => {
   try {
     const deletedPhoneCount = await Phone.destroy({ where: { id } });
     if (!deletedPhoneCount) {
-      return res.status(404).send([{ status: 404, title: 'Phone Not Found' }]);
+      return next(createHttpError(404, 'Phone Not Found'));
     }
 
     res.status(204).end();
