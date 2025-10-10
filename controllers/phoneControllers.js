@@ -125,3 +125,23 @@ module.exports.deletePhoneById = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.getPhonePreorders = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const foundPhone = await Phone.findByPk(id);
+
+    if (!foundPhone) {
+      return next(createHttpError(404, 'Phone Not Found'));
+    }
+    const foundPhonePreorders = await foundPhone.getPreorders({
+      raw: true,
+      attributes: { exclude: EXCLUDE_ATTRIBUTES },
+    });
+
+    res.status(200).send({ data: foundPhonePreorders });
+  } catch (err) {
+    next(err);
+  }
+};

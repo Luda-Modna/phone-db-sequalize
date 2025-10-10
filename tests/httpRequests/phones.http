@@ -59,3 +59,9 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5000/api/phones/66
+
+###
+GET http://localhost:5000/api/phones/8/preorders
+
+###
+GET http://localhost:5000/api/phones/1/preorders
